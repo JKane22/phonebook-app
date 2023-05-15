@@ -44,8 +44,12 @@ function App() {
     return phoneNumber;
   };
 
-  // Disable submit button if name or number is empty
-  const disableSubmit = name === "" || number === "";
+  // Disable submit button if name or number is empty and if the number is long enough (10 digits) and if its too long (more than 10 digits)
+  const disableSubmit =
+    name === "" ||
+    number === "" ||
+    number.length < 10 ||
+    formatPhoneNumber(number).length < 10;
 
   return (
     <div className="App bg-slate-100 min-h-screen h-full">
@@ -63,7 +67,7 @@ function App() {
         <input
           className="input my-5 mx-2 lg:block hidden bg-transparent text-2xl"
           type="tel"
-          placeholder="Person's Number"
+          placeholder="(XXX) XXX-XXXX"
           onChange={(e) => setNumber(e.target.value)}
           value={formatPhoneNumber(number)}
         />
@@ -95,7 +99,7 @@ function App() {
             <input
               className="input my-2 bg-transparent text-2xl block w-full"
               type="tel"
-              placeholder="Person's Number"
+              placeholder="(XXX) XXX-XXXX"
               onChange={(e) => setNumber(e.target.value)}
               value={formatPhoneNumber(number)}
             />
@@ -134,6 +138,21 @@ function App() {
                     setContacts(contacts.filter((_, i) => i !== index))
                   }
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-x"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
                   Delete
                 </button>
               </h1>
