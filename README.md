@@ -5,8 +5,7 @@ In this project I learned way better ways of moving things with React with <code
 
 I also learned how to check if that number is already in the Array and if so throw a error to the user letting them know!
 ## Feature updates for this Project?
-- I plan on adding a Edit feature for each of the Todo's that allows you to edit the Title of the Task!
-- I plan on adding a Read more if the Text is too long
+- A way to edit your contracts 
 
 ## App Deployment? 
 [Play with the App here](https://phonebook-app-eta.vercel.app/)
