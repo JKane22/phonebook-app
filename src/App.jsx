@@ -4,6 +4,16 @@ import "./css/App.css";
 // Components
 import Navbar from "./components/Navbar";
 
+import { UilGithub, UilTwitter } from "@iconscout/react-unicons";
+
+function handleClickTwitter() {
+  window.location.href = "https://twitter.com/JereKane22";
+}
+
+function handleClickGithub() {
+  window.location.href = "https://github.com/Jkane22";
+}
+
 function App() {
   const [contacts, setContacts] = useState([]);
 
@@ -52,7 +62,7 @@ function App() {
     formatPhoneNumber(number).length < 10;
 
   return (
-    <div className="App bg-slate-100 min-h-screen h-full">
+    <div className="App bg-slate-100 min-h-screen">
       <Navbar />
       <div className="bg-white w-auto my-10 mx-10 rounded-xl flex text-black font-black text-2xl">
         <h1 className="my-7 ml-7 lg:block hidden">Name:</h1>
@@ -166,6 +176,27 @@ function App() {
           <h1 className="font-black text-black my-2 mx-3 text-xl">{error}</h1>
         </div>
       )}
+      <footer className="footer items-center p-5 text-neutral-content absolute bottom-0">
+        <div className="items-center grid-flow-col">
+          <p>
+            Created with ❤️ by: <span className="font-bold">Jkane22</span>
+          </p>
+        </div>
+        <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+          <a
+            className="hover:scale-125 duration-200"
+            onClick={handleClickTwitter}
+          >
+            <UilTwitter />
+          </a>
+          <a
+            className="hover:scale-125 duration-200"
+            onClick={handleClickGithub}
+          >
+            <UilGithub />
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
