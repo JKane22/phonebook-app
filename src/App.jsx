@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./css/App.css";
 
 // Components
@@ -34,12 +34,40 @@ function App() {
       return;
     }
 
+    // Add Contact to LocalStorage
+    localStorage.setItem(
+      "contacts",
+      JSON.stringify([
+        ...contacts,
+        { name, number, id: Math.round(Math.random() * 1000) },
+      ])
+    );
+
+    // Update Contacts List
     setContacts([
       ...contacts,
-      { name, number, id: Math.floor(Math.random() * 1000) },
+      { name, number, id: Math.round(Math.random() * 1000) },
     ]);
+
+    // Reset Form
     setName("");
     setNumber("");
+  };
+
+  // On Load Get Contacts from LocalStorage
+  useEffect(() => {
+    const getContacts = JSON.parse(localStorage.getItem("contacts"));
+    if (getContacts) return setContacts(getContacts);
+  }, []);
+
+  const removeContact = (id) => {
+    setContacts(contacts.filter((contact) => contact.id !== id));
+
+    // Remove Contact from LocalStorage
+    localStorage.setItem(
+      "contacts",
+      JSON.stringify(contacts.filter((contact) => contact.id !== id))
+    );
   };
 
   const formatPhoneNumber = (phoneNumber) => {
@@ -144,9 +172,7 @@ function App() {
                 {contact.name} - {formatPhoneNumber(contact.number)}
                 <button
                   className="btn btn-error btn-sm float-right"
-                  onClick={() =>
-                    setContacts(contacts.filter((_, i) => i !== index))
-                  }
+                  onClick={() => removeContact(contact.id)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
